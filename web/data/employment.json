@@ -1,0 +1,224 @@
+{
+  "meta": {
+    "title": "Discriminations à l'embauche en France — Coefficients d'impact",
+    "description": "Données statistiques issues d'études par testing et enquêtes nationales. Chaque coefficient représente la probabilité relative de rappel/entretien par rapport au profil de référence (coefficient 1.0).",
+    "sources": [
+      {
+        "id": "dares_2016",
+        "name": "DARES — Étude par testing sur les discriminations à l'embauche (Cediey & Foroni, 2016)",
+        "url": "https://dares.travail-emploi.gouv.fr",
+        "notes": "Envoi de 6381 paires de CV fictifs. Principal résultat : candidats au nom maghrébin obtiennent 36% de rappels en moins à CV équivalent."
+      },
+      {
+        "id": "defenseur_2022",
+        "name": "Défenseur des droits — Rapport annuel sur les discriminations (2022)",
+        "url": "https://www.defenseurdesdroits.fr",
+        "notes": "L'emploi représente 34% des saisines pour discrimination. L'origine est le 1er critère invoqué (22% des saisines emploi), devant le genre et le lieu de résidence."
+      },
+      {
+        "id": "insee_teo2_2022",
+        "name": "INSEE / INED — Enquête Trajectoires et Origines 2 (TeO2, 2022)",
+        "url": "https://www.insee.fr",
+        "notes": "Écarts de taux d'emploi après contrôle du niveau de diplôme. Immigrés d'Afrique subsaharienne : -15 pts vs population majoritaire. Femmes en emploi qualifié : persistance de l'écart de candidature dans les secteurs masculinisés."
+      },
+      {
+        "id": "ism_corum_2021",
+        "name": "ISM Corum — Testing discriminations patronymiques (2021)",
+        "url": "https://www.ismcorum.org",
+        "notes": "Réplication et actualisation des études DARES. Taux de discrimination patronymique stable sur 5 ans. Confirme le malus QPV entre 10 et 15%."
+      }
+    ],
+    "methodology": "Les coefficients sont calculés comme le ratio (taux de rappel du profil / taux de rappel du profil de référence). Un coefficient de 0.67 signifie que le candidat reçoit 33% de rappels en moins. Les effets peuvent se cumuler.",
+    "last_updated": "2024"
+  },
+
+  "impact_coefficients": {
+    "origin": {
+      "description": "Impact du patronyme et prénom sur le taux de rappel à l'embauche.",
+      "reference_profile": "franco_francais",
+      "source_ids": ["dares_2016", "ism_corum_2021", "defenseur_2022"],
+      "profiles": [
+        {
+          "id": "franco_francais",
+          "label": "Prénom et nom à consonance française",
+          "example": "Thomas Martin",
+          "coefficient": 1.0,
+          "callback_rate_pct": 24.7,
+          "notes": "Profil de référence dans les études DARES."
+        },
+        {
+          "id": "europeen_est",
+          "label": "Prénom et nom à consonance d'Europe de l'Est",
+          "example": "Pavel Nowak",
+          "coefficient": 0.91,
+          "callback_rate_pct": 22.5,
+          "notes": "Discrimination modérée, moins prononcée que pour les patronymes extra-européens."
+        },
+        {
+          "id": "asiatique",
+          "label": "Prénom et nom à consonance asiatique",
+          "example": "Minh Nguyen",
+          "coefficient": 0.85,
+          "callback_rate_pct": 21.0,
+          "notes": "Discrimination significative mais inférieure à celle observée pour les patronymes maghrébins ou africains."
+        },
+        {
+          "id": "maghrebin",
+          "label": "Prénom et nom à consonance maghrébine",
+          "example": "Karim Benali",
+          "coefficient": 0.67,
+          "callback_rate_pct": 16.5,
+          "notes": "Résultat principal de l'étude DARES 2016 : -36% de rappels. Confirmé par ISM Corum 2021. Principal critère discriminatoire dans l'emploi."
+        },
+        {
+          "id": "africain_subsaharien",
+          "label": "Prénom et nom à consonance africaine subsaharienne",
+          "example": "Ibrahima Diallo",
+          "coefficient": 0.62,
+          "callback_rate_pct": 15.3,
+          "notes": "Discrimination la plus élevée dans les études de testing. Cumul fréquent avec d'autres critères (lieu de résidence, genre)."
+        }
+      ]
+    },
+
+    "residence": {
+      "description": "Impact de l'adresse de résidence sur le taux de rappel à l'embauche.",
+      "reference_profile": "hors_qpv",
+      "source_ids": ["ism_corum_2021", "defenseur_2022"],
+      "profiles": [
+        {
+          "id": "quartier_affluent",
+          "label": "Quartier aisé (arrondissement central, commune résidentielle)",
+          "example": "Paris 16e, Neuilly-sur-Seine",
+          "coefficient": 1.05,
+          "notes": "Légère prime statistique observée dans certaines études. Non systématique."
+        },
+        {
+          "id": "hors_qpv",
+          "label": "Commune ordinaire, hors quartier prioritaire",
+          "example": "Adresse en zone pavillonnaire ou centre-ville moyen",
+          "coefficient": 1.0,
+          "notes": "Profil de référence."
+        },
+        {
+          "id": "qpv_moderé",
+          "label": "Quartier Prioritaire de la Ville (QPV) — petite agglomération",
+          "example": "QPV d'une ville moyenne",
+          "coefficient": 0.89,
+          "notes": "Malus QPV entre 10 et 15% selon ISM Corum 2021."
+        },
+        {
+          "id": "qpv_grand_ensemble",
+          "label": "Grand ensemble en QPV — métropole (Seine-Saint-Denis, banlieues lyonnaises...)",
+          "example": "Clichy-sous-Bois, Vaulx-en-Velin",
+          "coefficient": 0.83,
+          "notes": "Malus maximal observé. L'adresse seule entraîne une discrimination équivalente à un changement de patronyme mineur."
+        }
+      ]
+    },
+
+    "gender": {
+      "description": "Impact du genre sur le taux de rappel selon le secteur d'activité.",
+      "reference_profile": "homme_secteur_mixte",
+      "source_ids": ["defenseur_2022", "insee_teo2_2022"],
+      "profiles": [
+        {
+          "id": "homme_secteur_mixte",
+          "label": "Homme — secteur mixte",
+          "coefficient": 1.0,
+          "notes": "Profil de référence."
+        },
+        {
+          "id": "femme_secteur_mixte",
+          "label": "Femme — secteur mixte",
+          "coefficient": 0.94,
+          "notes": "Écart modéré en secteur mixte. Augmente si mention de temps partiel potentiel ou d'enfants en bas âge."
+        },
+        {
+          "id": "homme_secteur_feminise",
+          "label": "Homme — secteur féminisé (soin, petite enfance, RH)",
+          "coefficient": 0.88,
+          "notes": "Discrimination inverse. Les hommes sont sous-représentés et parfois pénalisés dans les candidatures."
+        },
+        {
+          "id": "femme_secteur_masculinise",
+          "label": "Femme — secteur masculinisé (tech, BTP, finance)",
+          "coefficient": 0.81,
+          "notes": "Discrimination la plus forte sur le critère genre. Renforce le plafond de verre dès la phase de candidature."
+        },
+        {
+          "id": "femme_25_35_mixte",
+          "label": "Femme 25–35 ans — secteur mixte (potentiel maternité perçu)",
+          "coefficient": 0.87,
+          "notes": "Le Défenseur des droits documente la discrimination liée à la grossesse et à l'âge procréatif. Illégal mais statistiquement mesurable."
+        }
+      ]
+    },
+
+    "education": {
+      "description": "Impact du niveau de diplôme et de l'établissement sur le taux de rappel.",
+      "reference_profile": "bac3_universite",
+      "source_ids": ["insee_teo2_2022", "defenseur_2022"],
+      "profiles": [
+        {
+          "id": "sans_diplome",
+          "label": "Sans diplôme (pas de bac)",
+          "coefficient": 0.45,
+          "notes": "Forte pénalité. S'accumule avec les autres critères de discrimination."
+        },
+        {
+          "id": "bac_pro",
+          "label": "Bac professionnel ou technologique",
+          "coefficient": 0.72,
+          "notes": "Accès limité aux postes qualifiés. Taux de rappel pénalisé hors offres ciblées."
+        },
+        {
+          "id": "bac3_universite",
+          "label": "Licence universitaire (Bac+3)",
+          "coefficient": 1.0,
+          "notes": "Profil de référence. Accès à la majorité des postes qualifiés."
+        },
+        {
+          "id": "bac5_universite",
+          "label": "Master universitaire (Bac+5)",
+          "coefficient": 1.18,
+          "notes": "Prime significative. Atténue partiellement d'autres discriminations, sans les éliminer."
+        },
+        {
+          "id": "grande_ecole",
+          "label": "Grande école (HEC, Polytechnique, Sciences Po...)",
+          "coefficient": 1.45,
+          "notes": "Prime très forte. Le signal grande école peut compenser une partie du malus d'origine, mais pas l'ensemble selon TeO2."
+        }
+      ]
+    }
+  },
+
+  "combination_rules": {
+    "description": "Les effets des critères se multiplient. Le score final d'un profil est le produit de ses coefficients.",
+    "formula": "score = coeff_origin × coeff_residence × coeff_gender × coeff_education",
+    "cap": {
+      "min": 0.1,
+      "max": 2.0,
+      "notes": "Plancher à 0.10 (quasi-impossibilité) et plafond à 2.0 (candidature idéale)."
+    },
+    "example_worst_case": {
+      "label": "Pire profil statistique",
+      "origin": "africain_subsaharien",
+      "residence": "qpv_grand_ensemble",
+      "gender": "femme_secteur_masculinise",
+      "education": "bac_pro",
+      "score": 0.37,
+      "interpretation": "Ce candidat obtient statistiquement 63% de rappels en moins qu'un candidat au profil de référence pour un poste équivalent."
+    },
+    "example_best_case": {
+      "label": "Profil le plus avantagé statistiquement",
+      "origin": "franco_francais",
+      "residence": "quartier_affluent",
+      "gender": "homme_secteur_mixte",
+      "education": "grande_ecole",
+      "score": 1.52,
+      "interpretation": "Ce candidat obtient statistiquement 52% de rappels en plus que le profil de référence."
+    }
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "title": "Données de discrimination au logement — France",
+    "description": "Coefficients d'impact de différents critères sur la probabilité d'obtenir une visite lors d'une recherche de logement, basés sur des études de testing françaises.",
+    "sources": [
+      {
+        "id": "defenseur_2022",
+        "name": "Défenseur des droits — Rapport annuel sur les discriminations (2022)",
+        "url": "https://www.defenseurdesdroits.fr",
+        "notes": "Le logement est le deuxième domaine de saisine après l'emploi. L'origine est le premier critère de discrimination invoqué dans les saisines logement."
+      },
+      {
+        "id": "cncdh_2021",
+        "name": "CNCDH — Rapport sur la lutte contre le racisme, l'antisémitisme et la xénophobie (2021)",
+        "url": "https://www.cncdh.fr",
+        "notes": "Documente les discriminations multicritères dans l'accès au logement privé. Souligne la persistance des refus fondés sur l'origine perçue et la composition familiale."
+      },
+      {
+        "id": "ism_corum_2021",
+        "name": "ISM Corum — Testing discriminations logement (2021)",
+        "url": "https://www.ismcorum.org",
+        "notes": "Testing par envoi de candidatures fictives à des annonces de location. Principal résultat : les candidats au patronyme maghrébin obtiennent 40% de réponses en moins que les candidats au patronyme franco-français à dossier financier équivalent."
+      }
+    ],
+    "methodology": "Les coefficients sont calculés comme le ratio (taux de réponse du profil / taux de réponse du profil de référence). Un coefficient de 0.60 signifie que le candidat reçoit 40% de visites accordées en moins. Les effets peuvent se cumuler.",
+    "last_updated": "2024-01-01"
+  },
+
+  "impact_coefficients": {
+    "origin": {
+      "description": "Impact du patronyme et prénom sur le taux d'obtention d'une visite lors d'une recherche de logement.",
+      "reference_profile": "franco_francais",
+      "source_ids": ["ism_corum_2021", "defenseur_2022", "cncdh_2021"],
+      "profiles": [
+        {
+          "id": "franco_francais",
+          "label": "Prénom et nom à consonance française",
+          "example": "Thomas Martin",
+          "coefficient": 1.0,
+          "notes": "Profil de référence dans les études de testing logement ISM Corum 2021."
+        },
+        {
+          "id": "europeen_est",
+          "label": "Prénom et nom à consonance d'Europe de l'Est",
+          "example": "Pavel Nowak",
+          "coefficient": 0.92,
+          "notes": "Discrimination modérée, moins prononcée que pour les patronymes extra-européens. Observée principalement dans les grandes métropoles."
+        },
+        {
+          "id": "asiatique",
+          "label": "Prénom et nom à consonance asiatique",
+          "example": "Minh Nguyen",
+          "coefficient": 0.85,
+          "notes": "Discrimination significative documentée dans le secteur locatif privé. Moins élevée que pour les patronymes maghrébins ou africains."
+        },
+        {
+          "id": "maghrebin",
+          "label": "Prénom et nom à consonance maghrébine",
+          "example": "Karim Benali",
+          "coefficient": 0.60,
+          "notes": "Résultat principal de l'étude ISM Corum 2021 : -40% de réponses positives à dossier équivalent. Discrimination très documentée, constituant le premier motif de saisine du Défenseur des droits pour le logement."
+        },
+        {
+          "id": "africain_subsaharien",
+          "label": "Prénom et nom à consonance africaine subsaharienne",
+          "example": "Ibrahima Diallo",
+          "coefficient": 0.55,
+          "notes": "Discrimination la plus élevée parmi les critères d'origine dans les études de testing logement. Se cumule fréquemment avec d'autres critères défavorables."
+        }
+      ]
+    },
+
+    "income": {
+      "description": "Impact de la situation financière et du type de contrat de travail sur le taux d'obtention d'une visite.",
+      "reference_profile": "revenus_moyens",
+      "source_ids": ["defenseur_2022", "cncdh_2021"],
+      "profiles": [
+        {
+          "id": "revenus_eleves",
+          "label": "Revenus élevés — CDI cadre, revenus supérieurs à 3 fois le loyer",
+          "example": "Cadre en CDI, salaire net 4 000 €/mois pour un loyer de 1 200 €",
+          "coefficient": 1.15,
+          "notes": "Prime statistique observée pour les dossiers financièrement très solides. Les propriétaires accordent une réponse prioritaire aux candidats présentant un taux d'effort très faible."
+        },
+        {
+          "id": "revenus_moyens",
+          "label": "Revenus moyens — CDI, revenus entre 2 et 3 fois le loyer",
+          "example": "Salarié en CDI, salaire net 2 400 €/mois pour un loyer de 900 €",
+          "coefficient": 1.0,
+          "notes": "Profil de référence correspondant aux exigences habituelles des propriétaires (revenus supérieurs à 2,5 fois le loyer en CDI)."
+        },
+        {
+          "id": "revenus_modestes",
+          "label": "Revenus modestes — CDD ou intérim, revenus entre 1,5 et 2 fois le loyer",
+          "example": "Salarié en CDD, salaire net 1 400 €/mois pour un loyer de 800 €",
+          "coefficient": 0.75,
+          "notes": "Pénalité liée à la précarité du contrat de travail, indépendamment du montant des revenus. Les propriétaires rejettent fréquemment les candidatures en CDD sans garantie supplémentaire."
+        },
+        {
+          "id": "allocataire_apl",
+          "label": "Bénéficiaire de l'APL",
+          "example": "Salarié à temps partiel percevant une aide personnalisée au logement",
+          "coefficient": 0.55,
+          "notes": "Discrimination documentée contre les bénéficiaires d'aides au logement. Certains propriétaires refusent explicitement les dossiers APL bien que cette pratique soit illégale depuis la loi ELAN 2018."
+        },
+        {
+          "id": "rsa_minima_sociaux",
+          "label": "Bénéficiaire du RSA ou d'autres minima sociaux",
+          "example": "Personne percevant le RSA comme revenu principal",
+          "coefficient": 0.35,
+          "notes": "Coefficient le plus défavorable sur l'axe financier. La combinaison de revenus faibles et de prestations sociales entraîne un taux de refus très élevé dans le secteur locatif privé, documenté par le Défenseur des droits."
+        }
+      ]
+    },
+
+    "household_type": {
+      "description": "Impact de la composition du foyer sur le taux d'obtention d'une visite.",
+      "reference_profile": "celibataire",
+      "source_ids": ["defenseur_2022", "cncdh_2021"],
+      "profiles": [
+        {
+          "id": "couple_sans_enfants",
+          "label": "Couple sans enfants",
+          "example": "Deux actifs en couple, sans enfant à charge",
+          "coefficient": 1.05,
+          "notes": "Légère prime statistique observée. Les propriétaires perçoivent un couple sans enfant comme un locataire stable présentant deux sources de revenus potentielles."
+        },
+        {
+          "id": "celibataire",
+          "label": "Personne seule sans enfant",
+          "example": "Adulte célibataire sans enfant à charge",
+          "coefficient": 1.0,
+          "notes": "Profil de référence."
+        },
+        {
+          "id": "famille_2_enfants",
+          "label": "Famille avec 2 enfants",
+          "example": "Couple ou parent avec 2 enfants à charge",
+          "coefficient": 0.80,
+          "notes": "Pénalité liée à la perception de sur-occupation du logement et à l'usure supposée plus importante. Les propriétaires filtrent fréquemment les familles pour des logements de taille pourtant adaptée."
+        },
+        {
+          "id": "famille_3_enfants_plus",
+          "label": "Famille avec 3 enfants ou plus",
+          "example": "Famille avec 3 enfants ou plus à charge",
+          "coefficient": 0.60,
+          "notes": "Forte pénalité documentée. Les grandes familles font face à un double obstacle : la rareté des logements de grande taille et la discrimination directe des propriétaires, quel que soit le logement visé."
+        },
+        {
+          "id": "parent_isole",
+          "label": "Parent isolé avec enfant(s)",
+          "example": "Mère ou père seul avec un ou plusieurs enfants à charge",
+          "coefficient": 0.65,
+          "notes": "Pénalité liée à la perception d'un risque financier accru (revenu unique) et à des préjugés sur la stabilité du foyer. Le Défenseur des droits documente la sur-représentation des familles monoparentales parmi les victimes de discrimination au logement."
+        }
+      ]
+    },
+
+    "age": {
+      "description": "Impact de l'âge du locataire sur le taux d'obtention d'une visite.",
+      "reference_profile": "adulte_25_45",
+      "source_ids": ["defenseur_2022", "cncdh_2021"],
+      "profiles": [
+        {
+          "id": "adulte_25_45",
+          "label": "Adulte de 25 à 45 ans",
+          "example": "Locataire de 30 ans en activité professionnelle",
+          "coefficient": 1.0,
+          "notes": "Profil de référence. Tranche d'âge perçue comme la plus solvable et la plus stable par les propriétaires."
+        },
+        {
+          "id": "jeune_18_24",
+          "label": "Jeune adulte de 18 à 24 ans",
+          "example": "Étudiant ou jeune salarié en début de carrière",
+          "coefficient": 0.85,
+          "notes": "Pénalité liée à la perception d'une situation financière précaire et d'une instabilité résidentielle. Les jeunes sans garant parental font face à des refus fréquents même en justifiant de revenus suffisants."
+        },
+        {
+          "id": "adulte_45_60",
+          "label": "Adulte de 45 à 60 ans",
+          "example": "Salarié expérimenté ou indépendant entre 45 et 60 ans",
+          "coefficient": 0.95,
+          "notes": "Légère pénalité observée dans certaines études. Globalement peu discriminé sur le seul critère de l'âge dans cette tranche."
+        },
+        {
+          "id": "senior_60_plus",
+          "label": "Senior de 60 ans et plus",
+          "example": "Retraité ou pré-retraité de 60 ans ou plus",
+          "coefficient": 0.80,
+          "notes": "Pénalité documentée par le CNCDH. Les propriétaires expriment des réticences liées à des risques perçus de santé, de dépendance future ou de décès en cours de bail. Cette discrimination fondée sur l'âge est illégale mais statistiquement mesurable."
+        }
+      ]
+    }
+  },
+
+  "combination_rules": {
+    "description": "Les effets des critères se multiplient. Le score final d'un profil est le produit de ses coefficients.",
+    "formula": "score = ∏ coefficients",
+    "cap": {
+      "min": 0.10,
+      "max": 2.00,
+      "notes": "Plancher à 0.10 (quasi-impossibilité d'obtenir une visite) et plafond à 2.00 (dossier idéal)."
+    },
+    "example_worst_case": {
+      "label": "Pire profil statistique",
+      "origin": "africain_subsaharien",
+      "income": "rsa_minima_sociaux",
+      "household_type": "famille_3_enfants_plus",
+      "age": "senior_60_plus",
+      "score": 0.10,
+      "interpretation": "Ce candidat cumule les critères les plus pénalisants. Le produit brut des coefficients (0.55 × 0.35 × 0.60 × 0.80 ≈ 0.092) est plafonné au minimum de 0.10, soit statistiquement 90% de visites en moins qu'un profil de référence."
+    },
+    "example_best_case": {
+      "label": "Profil le plus avantagé statistiquement",
+      "origin": "franco_francais",
+      "income": "revenus_eleves",
+      "household_type": "couple_sans_enfants",
+      "age": "adulte_25_45",
+      "score": 1.21,
+      "interpretation": "Ce candidat obtient statistiquement 21% de visites accordées en plus que le profil de référence (1.00 × 1.15 × 1.05 × 1.00 = 1.2075)."
+    }
+  }
+}
