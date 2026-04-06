@@ -12,6 +12,7 @@ const pixelFont = Press_Start_2P({
 export const metadata: Metadata = {
   title: "Reo le Prisme",
   description: "Simulation des discriminations à l'embauche en France",
+  icons: { icon: "/favicon.png" },
 };
 
 export default function RootLayout({
